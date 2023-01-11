@@ -1,0 +1,121 @@
+<!DOCTYPE CrossStudio_Session_File>
+<session>
+ <Bookmarks/>
+ <Breakpoints groups="Breakpoints" active_group="Breakpoints"/>
+ <ExecutionProfileWindow/>
+ <FrameBufferWindow>
+  <FrameBufferWindow bufferHeight="-1" addressSpace="" addressText="" bufferWidth="-1"/>
+ </FrameBufferWindow>
+ <Memory1>
+  <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" viewType="4" addressOrder="0" columnsText="" refreshPeriod="0" name="adafruit_tag_reader_pca10040_Release" sizeText="" addressText=""/>
+ </Memory1>
+ <Memory2>
+  <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" viewType="4" addressOrder="0" columnsText="" refreshPeriod="0" name="adafruit_tag_reader_pca10040_Release" sizeText="" addressText=""/>
+ </Memory2>
+ <Memory3>
+  <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" viewType="4" addressOrder="0" columnsText="" refreshPeriod="0" name="adafruit_tag_reader_pca10040_Release" sizeText="" addressText=""/>
+ </Memory3>
+ <Memory4>
+  <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" viewType="4" addressOrder="0" columnsText="" refreshPeriod="0" name="adafruit_tag_reader_pca10040_Release" sizeText="" addressText=""/>
+ </Memory4>
+ <Project>
+  <ProjectSessionItem path="adafruit_tag_reader_pca10040"/>
+  <ProjectSessionItem path="adafruit_tag_reader_pca10040;adafruit_tag_reader_pca10040"/>
+  <ProjectSessionItem path="adafruit_tag_reader_pca10040;adafruit_tag_reader_pca10040;Application"/>
+  <ProjectSessionItem path="adafruit_tag_reader_pca10040;adafruit_tag_reader_pca10040;Board Definition"/>
+  <ProjectSessionItem path="adafruit_tag_reader_pca10040;adafruit_tag_reader_pca10040;Board Support"/>
+  <ProjectSessionItem path="adafruit_tag_reader_pca10040;adafruit_tag_reader_pca10040;None"/>
+  <ProjectSessionItem path="adafruit_tag_reader_pca10040;adafruit_tag_reader_pca10040;nRF_Drivers"/>
+  <ProjectSessionItem path="adafruit_tag_reader_pca10040;adafruit_tag_reader_pca10040;nRF_Libraries"/>
+  <ProjectSessionItem path="adafruit_tag_reader_pca10040;adafruit_tag_reader_pca10040;nRF_Log"/>
+  <ProjectSessionItem path="adafruit_tag_reader_pca10040;adafruit_tag_reader_pca10040;nRF_NFC"/>
+  <ProjectSessionItem path="adafruit_tag_reader_pca10040;adafruit_tag_reader_pca10040;nRF_Segger_RTT"/>
+  <ProjectSessionItem path="adafruit_tag_reader_pca10040;adafruit_tag_reader_pca10040;Segger Startup Files"/>
+  <ProjectSessionItem path="adafruit_tag_reader_pca10040;adafruit_tag_reader_pca10040;Third Parties"/>
+ </Project>
+ <Register1>
+  <RegisterWindow visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/MSP;CPU/PSP;CPU/PRIMASK;CPU/BASEPRI;CPU/FAULTMASK;CPU/CONTROL;CPU/internal" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context" name="adafruit_tag_reader_pca10040_Release" decimalNodes="" octalNodes="" unsignedNodes=""/>
+ </Register1>
+ <Register2>
+  <RegisterWindow visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/MSP;CPU/PSP;CPU/PRIMASK;CPU/BASEPRI;CPU/FAULTMASK;CPU/CONTROL;CPU/internal" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context" name="adafruit_tag_reader_pca10040_Release" decimalNodes="" octalNodes="" unsignedNodes=""/>
+ </Register2>
+ <Register3>
+  <RegisterWindow visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/MSP;CPU/PSP;CPU/PRIMASK;CPU/BASEPRI;CPU/FAULTMASK;CPU/CONTROL;CPU/internal" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context" name="adafruit_tag_reader_pca10040_Release" decimalNodes="" octalNodes="" unsignedNodes=""/>
+ </Register3>
+ <Register4>
+  <RegisterWindow visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/MSP;CPU/PSP;CPU/PRIMASK;CPU/BASEPRI;CPU/FAULTMASK;CPU/CONTROL;CPU/internal" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context" name="adafruit_tag_reader_pca10040_Release" decimalNodes="" octalNodes="" unsignedNodes=""/>
+ </Register4>
+ <Threads>
+  <ThreadsWindow showLists=""/>
+ </Threads>
+ <TraceWindow>
+  <Trace enabled="Yes"/>
+ </TraceWindow>
+ <Watch1>
+  <Watches active="1" update="Never"/>
+ </Watch1>
+ <Watch2>
+  <Watches active="0" update="Never"/>
+ </Watch2>
+ <Watch3>
+  <Watches active="0" update="Never"/>
+ </Watch3>
+ <Watch4>
+  <Watches active="0" update="Never"/>
+ </Watch4>
+ <Files>
+  <SessionOpenFile windowGroup="DockEditLeft" x="22" y="527" useTextEdit="1" folds0="174,184,210,292,350,405,409,426,457,471,583,656,669,678,688,708,717" path="../../../main.c" left="0" top="311" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="8" y="3" useTextEdit="1" openedFrom="C:/Users/haris/Downloads/DeviceDownload/nRF5_SDK_17.1.0_ddde560/nRF5_SDK_17.1.0_ddde560/examples/My Project/adafruit_tag_reader/nfc_spk_eeprom/nfc_spk_eeprom.c" path="../../../main.h" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="37" y="50" useTextEdit="1" openedFrom="C:/Users/haris/Downloads/DeviceDownload/nRF5_SDK_17.1.0_ddde560/nRF5_SDK_17.1.0_ddde560/examples/My Project/adafruit_tag_reader/main.c" path="../../../nfc_spk_eeprom/nfc_spk_eeprom.h" left="0" selected="1" top="38" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="44" y="45" useTextEdit="1" openedFrom="C:/Users/haris/Downloads/DeviceDownload/nRF5_SDK_17.1.0_ddde560/nRF5_SDK_17.1.0_ddde560/examples/My Project/adafruit_tag_reader/nfc_spk_eeprom/nfc_spk_eeprom.h" path="../../../nfc_spk_eeprom/nfc_spk_eeprom.c" left="0" top="35" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="22" y="49" useTextEdit="1" openedFrom="C:/Users/haris/Downloads/DeviceDownload/nRF5_SDK_17.1.0_ddde560/nRF5_SDK_17.1.0_ddde560/examples/My Project/adafruit_tag_reader/nfc_spk_eeprom/nfc_spk_eeprom.c" path="../../../../../../components/libraries/eeprom/eeprom.h" left="0" top="54" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="4" y="46" useTextEdit="1" openedFrom="C:/Users/haris/Downloads/DeviceDownload/nRF5_SDK_17.1.0_ddde560/nRF5_SDK_17.1.0_ddde560/examples/My Project/adafruit_tag_reader/nfc_spk_eeprom/nfc_spk_eeprom.c" path="../../../../../../components/libraries/eeprom/eeprom.c" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="36" y="353" useTextEdit="1" openedFrom="C:/Users/haris/Downloads/DeviceDownload/nRF5_SDK_17.1.0_ddde560/nRF5_SDK_17.1.0_ddde560/examples/My Project/adafruit_tag_reader/main.c" path="../../../../../../external/nfc_adafruit_library/adafruit_pn532.h" left="0" top="211" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="26" y="31" useTextEdit="1" path="../../../../../../external/nfc_adafruit_library/adafruit_pn532.c" left="0" top="201" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="2" y="93" useTextEdit="1" openedFrom="C:/Users/haris/Downloads/DeviceDownload/nRF5_SDK_17.1.0_ddde560/nRF5_SDK_17.1.0_ddde560/components/libraries/button/app_button.c" path="../../../../../../components/libraries/button/app_button.h" left="0" top="67" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="13" y="170" useTextEdit="1" openedFrom="C:/Users/haris/Downloads/DeviceDownload/nRF5_SDK_17.1.0_ddde560/nRF5_SDK_17.1.0_ddde560/examples/My Project/adafruit_tag_reader/main.c" path="../../../../../../components/libraries/util/app_error.h" left="0" top="138" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="19" y="13" useTextEdit="1" path="../../../../../../components/libraries/util/app_util_platform.c" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="../../../../../../components/libraries/util/app_error_handler_iar.c" left="0" top="30" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="22" y="39" useTextEdit="1" path="../../../../../../components/libraries/util/app_error_handler_gcc.c" left="0" top="18" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="../../../../../../components/libraries/timer/drv_rtc.c" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="16" y="39" useTextEdit="1" path="../../../../../../components/libraries/timer/app_timer2.c" left="0" top="39" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="../../../../../../components/libraries/uart/app_uart_fifo.c" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="29" y="260" useTextEdit="1" path="../../../../../../components/libraries/button/app_button.c" left="0" top="249" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="../../../../../../components/libraries/fifo/app_fifo.c" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="../../../../../../components/libraries/scheduler/app_scheduler.c" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="../../../../../../components/libraries/util/nrf_assert.c" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="40" y="36" useTextEdit="1" path="../../../../../../components/libraries/sortlist/nrf_sortlist.c" left="0" top="5" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="60" useTextEdit="1" openedFrom="C:/Users/haris/Downloads/DeviceDownload/nRF5_SDK_17.1.0_ddde560/nRF5_SDK_17.1.0_ddde560/components/libraries/sortlist/nrf_sortlist.c" path="../../../../../../components/libraries/sortlist/nrf_sortlist.h" left="0" top="55" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="20" y="57" useTextEdit="1" path="../../../../../../components/libraries/atomic_fifo/nrf_atfifo.c" left="0" top="33" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="31" y="45" useTextEdit="1" path="../../../../../../components/libraries/log/src/nrf_log_backend_serial.c" left="0" top="25" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="../../../../../../components/libraries/memobj/nrf_memobj.c" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="25" y="49" useTextEdit="1" path="../../../../../../components/libraries/atomic/nrf_atomic.c" left="0" top="42" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" openedFrom="C:/Users/haris/Downloads/DeviceDownload/nRF5_SDK_17.1.0_ddde560/nRF5_SDK_17.1.0_ddde560/components/libraries/atomic/nrf_atomic.c" path="../../../../../../components/libraries/atomic/nrf_atomic.h" left="0" top="42" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="20" y="176" useTextEdit="1" openedFrom="C:/Users/haris/Downloads/DeviceDownload/nRF5_SDK_17.1.0_ddde560/nRF5_SDK_17.1.0_ddde560/examples/My Project/adafruit_tag_reader/main.c" path="../../../../../../integration/nrfx/legacy/nrf_drv_twi.c" left="0" top="161" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="2" y="143" useTextEdit="1" openedFrom="C:/Users/haris/Downloads/DeviceDownload/nRF5_SDK_17.1.0_ddde560/nRF5_SDK_17.1.0_ddde560/examples/My Project/adafruit_tag_reader/main.c" path="../../../../../../integration/nrfx/legacy/nrf_drv_twi.h" left="0" top="155" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="../../../../../../modules/nrfx/mdk/system_nrf52.c" left="0" top="48" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="../../../../../../modules/nrfx/mdk/ses_startup_nrf_common.s" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="62" y="190" useTextEdit="1" openedFrom="C:/Users/haris/Downloads/DeviceDownload/nRF5_SDK_17.1.0_ddde560/nRF5_SDK_17.1.0_ddde560/examples/My Project/adafruit_tag_reader/main.c" path="../../../../../../components/libraries/log/nrf_log.h" left="0" top="178" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" openedFrom="C:/Users/haris/Downloads/DeviceDownload/nRF5_SDK_17.1.0_ddde560/nRF5_SDK_17.1.0_ddde560/examples/My Project/adafruit_tag_reader/nfc_spk_eeprom/nfc_spk_eeprom.h" path="C:/Program Files/SEGGER/SEGGER Embedded Studio for ARM 7.10/include/stdint.h" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="31" y="152" useTextEdit="1" openedFrom="C:/Users/haris/Downloads/DeviceDownload/nRF5_SDK_17.1.0_ddde560/nRF5_SDK_17.1.0_ddde560/components/libraries/button/app_button.c" path="../../../../../../components/libraries/timer/app_timer.h" left="0" top="135" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="59" y="60" useTextEdit="1" openedFrom="C:/Users/haris/Downloads/DeviceDownload/nRF5_SDK_17.1.0_ddde560/nRF5_SDK_17.1.0_ddde560/components/libraries/timer/app_timer.h" path="../../../../../../components/libraries/log/nrf_log_instance.h" left="0" top="29" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="../../../../../../modules/nrfx/soc/nrfx_atomic.c" left="0" top="57" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="681" useTextEdit="1" openedFrom="C:/Users/haris/Downloads/DeviceDownload/nRF5_SDK_17.1.0_ddde560/nRF5_SDK_17.1.0_ddde560/integration/nrfx/legacy/nrf_drv_twi.h" path="../../../../../../modules/nrfx/drivers/src/nrfx_twi.c" left="0" top="673" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="15" y="63" useTextEdit="1" openedFrom="C:/Users/haris/Downloads/DeviceDownload/nRF5_SDK_17.1.0_ddde560/nRF5_SDK_17.1.0_ddde560/integration/nrfx/legacy/nrf_drv_twi.h" path="../../../../../../modules/nrfx/drivers/include/nrfx_twi.h" left="0" top="53" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="2" y="1388" useTextEdit="1" openedFrom="C:/Users/haris/Downloads/DeviceDownload/nRF5_SDK_17.1.0_ddde560/nRF5_SDK_17.1.0_ddde560/modules/nrfx/drivers/include/nrfx_twi.h" path="../../../../../../modules/nrfx/mdk/nrf52.h" left="0" top="1359" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="17" y="158" useTextEdit="1" openedFrom="C:/Users/haris/Downloads/DeviceDownload/nRF5_SDK_17.1.0_ddde560/nRF5_SDK_17.1.0_ddde560/examples/My Project/adafruit_tag_reader/main.c" path="../../../../../../components/libraries/util/sdk_errors.h" left="0" top="139" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="8" y="76" useTextEdit="1" openedFrom="C:/Users/haris/Downloads/DeviceDownload/nRF5_SDK_17.1.0_ddde560/nRF5_SDK_17.1.0_ddde560/examples/My Project/adafruit_tag_reader/nfc_spk_eeprom/nfc_spk_eeprom.c" path="../../../../../../components/drivers_nrf/nrf_soc_nosd/nrf_error.h" left="0" top="64" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="8" y="184" useTextEdit="1" openedFrom="C:/Users/haris/Downloads/DeviceDownload/nRF5_SDK_17.1.0_ddde560/nRF5_SDK_17.1.0_ddde560/components/libraries/log/nrf_log.h" path="../../../../../../components/libraries/log/src/nrf_log_internal.h" left="0" top="172" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="22" y="29" useTextEdit="1" openedFrom="C:/Users/haris/Downloads/DeviceDownload/nRF5_SDK_17.1.0_ddde560/nRF5_SDK_17.1.0_ddde560/examples/My Project/adafruit_tag_reader/nfc_spk_eeprom/nfc_spk_eeprom.c" path="../../../../../../external/oled/ssd1306_oled.c" left="0" top="17" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="20" y="120" useTextEdit="1" openedFrom="C:/Users/haris/Downloads/DeviceDownload/nRF5_SDK_17.1.0_ddde560/nRF5_SDK_17.1.0_ddde560/external/oled/ssd1306_oled.c" path="../../../../../../external/oled/ssd1306.h" left="0" top="107" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="99" useTextEdit="1" path="../../../../../../components/libraries/util/app_error_weak.c" left="0" top="81" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="26" y="1557" useTextEdit="1" path="../config/sdk_config.h" left="0" top="1540" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="../../../../../../components/boards/boards.c" left="0" top="48" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" openedFrom="C:/Users/haris/Downloads/DeviceDownload/nRF5_SDK_17.1.0_ddde560/nRF5_SDK_17.1.0_ddde560/external/nfc_adafruit_library/adafruit_pn532.c" path="C:/Program Files/SEGGER/SEGGER Embedded Studio for ARM 7.10/include/stdio.h" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" path="Output/Release/Obj/adafruit_tag_reader_pca10040/nfc_spk_eeprom.o" left="0" top="205" codecName=""/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Output/Release/Obj/adafruit_tag_reader_pca10040/nfc_spk_eeprom_PP.c" left="0" top="123" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="8" y="100" useTextEdit="1" openedFrom="C:/Users/haris/Downloads/DeviceDownload/nRF5_SDK_17.1.0_ddde560/nRF5_SDK_17.1.0_ddde560/examples/My Project/adafruit_tag_reader/main.c" path="../../../../../../components/libraries/log/nrf_log_ctrl.h" left="0" top="88" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="8" y="37" useTextEdit="1" openedFrom="C:/Users/haris/Downloads/DeviceDownload/nRF5_SDK_17.1.0_ddde560/nRF5_SDK_17.1.0_ddde560/examples/My Project/adafruit_tag_reader/nfc_spk_eeprom/nfc_spk_eeprom.c" path="C:/Program Files/SEGGER/SEGGER Embedded Studio for ARM 7.10/include/stddef.h" left="0" top="26" codecName="Default"/>
+ </Files>
+ <EMStudioWindow activeProject="adafruit_tag_reader_pca10040" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Release" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="C:/Users/haris/Downloads/DeviceDownload/nRF5_SDK_17.1.0_ddde560/nRF5_SDK_17.1.0_ddde560/examples/My Project/adafruit_tag_reader/nfc_spk_eeprom" debugSearchPath="" autoConnectCapabilities="3711"/>
+</session>
