@@ -37,7 +37,7 @@ ret_code_t adv_init()
     return NRF_SUCCESS;
 }
 
-static ret_code_t adv_data_config( uint16_t spk_id, uint32_t counter, uint8_t * const nfc_id, uint8_t nfc_id_len)
+static ret_code_t adv_data_config( uint16_t spk_id, uint32_t counter, uint8_t * const nfc_id, uint8_t nfc_id_len, adv_type_t adv_type)
 {
     ret_code_t err = NRF_SUCCESS;
     ble_advdata_t adv_data;
@@ -46,7 +46,15 @@ static ret_code_t adv_data_config( uint16_t spk_id, uint32_t counter, uint8_t * 
     
     memset(&adv_data, 0, sizeof(adv_data));
 
-    uint8_t num_of_characters = snprintf(app_data, BLE_GAP_ADV_SET_DATA_SIZE_MAX, "DAT#%d#%d#", spk_id, counter);
+    uint8_t num_of_characters;
+    if (adv_type == ADV_COUNTING)
+    {
+        num_of_characters = snprintf(app_data, BLE_GAP_ADV_SET_DATA_SIZE_MAX, "DAT#%d#%d#", spk_id, counter);
+    }
+    else if (adv_type == ADV_COUNTING_DONE)
+    {
+        num_of_characters = snprintf(app_data, BLE_GAP_ADV_SET_DATA_SIZE_MAX, "DON#%d#%d#", spk_id, counter);
+    }
     memcpy(&(app_data[num_of_characters]), nfc_id, nfc_id_len);
     NRF_LOG_HEXDUMP_INFO(app_data, num_of_characters + nfc_id_len);
 
@@ -68,11 +76,11 @@ static ret_code_t adv_data_config( uint16_t spk_id, uint32_t counter, uint8_t * 
     return err;
 }
 
-ret_code_t adv_start_or_update(uint16_t spk_id, uint32_t counter, uint8_t * const nfc_id, uint8_t nfc_id_len)
+ret_code_t adv_start_or_update(uint16_t spk_id, uint32_t counter, uint8_t * const nfc_id, uint8_t nfc_id_len, adv_type_t adv_type)
 {
     ret_code_t err;
     m_adv_data.adv_data.len = BLE_GAP_ADV_SET_DATA_SIZE_MAX;
-    err = adv_data_config(spk_id, counter, nfc_id, nfc_id_len);
+    err = adv_data_config(spk_id, counter, nfc_id, nfc_id_len, adv_type);
     VERIFY_SUCCESS(err);
 
     if (m_adv_active)

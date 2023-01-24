@@ -36,8 +36,9 @@
 ////#define OFFSET_INDEXES_SPK_LIST               (OFFSET_COUNTER_ACTIVE_SPK+1)
 
 #define DELAY_CHANGE_STATE_DISPLAY             2000                                          /// delay state change from START to COUNTING or from COUNTING DONE to IDLE
+//#define INTERVAL_ADV_COUNTING_DONE             500                                            // define how long in msec interval between counting done advertisement
 
-#define NUM_OF_TICKS_DETECTION_DELAY_BUTTON     100
+#define NUM_OF_TICKS_DETECTION_DELAY_BUTTON     20
 
 #define TIMER_TICKS_PER_SHOT                    100
 #define NUM_OF_TICKS_CHANGE_NFC                 10

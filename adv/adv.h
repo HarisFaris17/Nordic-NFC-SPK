@@ -15,11 +15,17 @@
                                   .properties.type = BLE_GAP_ADV_TYPE_NONCONNECTABLE_NONSCANNABLE_UNDIRECTED      \
                               }
 
+typedef enum {
+    ADV_COUNTING,
+    ADV_COUNTING_DONE,
+}adv_type_t;
+
+
 ret_code_t adv_init();
 
-ret_code_t adv_start_or_update(uint16_t spk_id, uint32_t counter, uint8_t * const nfc_id, uint8_t nfc_id_len);
+ret_code_t adv_start_or_update(uint16_t spk_id, uint32_t counter, uint8_t * const nfc_id, uint8_t nfc_id_len, adv_type_t adv_type);
 
-static ret_code_t adv_data_config(uint16_t spk_id, uint32_t counter, uint8_t * const nfc_id, uint8_t nfc_id_len);
+static ret_code_t adv_data_config(uint16_t spk_id, uint32_t counter, uint8_t * const nfc_id, uint8_t nfc_id_len, adv_type_t adv_type);
 
 ret_code_t adv_stop();
 

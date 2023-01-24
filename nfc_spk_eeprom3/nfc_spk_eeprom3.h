@@ -71,6 +71,10 @@ ret_code_t nfc_spk_retrieve_comprehensive();
 
 ret_code_t nfc_spk_save();
 
+ret_code_t nfc_spk_reset_and_save();
+
+static void increase_spk();
+
 ret_code_t nfc_spk_retrieve_complete_set_by_nfc_index(uint8_t nfc_index);
 
 ret_code_t nfc_spk_retrieve_spk(uint8_t nfc_index, uint8_t spk_index);

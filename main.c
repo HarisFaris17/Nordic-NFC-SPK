@@ -55,7 +55,7 @@
 #define TAG_TYPE_4_NLEN_FIELD_SIZE          2                                             /// Size of NLEN field inside NDEF file.
 
 
-#define led 31
+#define BUZZER 31
 
 
 #define STORE_VAR_START_ADDR_FLASH          0x3e000                                       /// starting address to store data in flash
@@ -133,6 +133,8 @@ static void timer_handler(void * p_context);
 
 static void timer_button_handler(void *p_context);
 
+static void timer_advertising_handler(void * p_context);
+
 static void update_display_state(state_type_t state);
 
 static void display_counting_done();
@@ -144,6 +146,8 @@ static void display_choose_spk();
 static void startup_spk_counter_eeprom();
 
 static void save_current_counter();
+
+static void toggle_two_times_buzzer();
 
 
 //static void save_eeprom();
@@ -172,14 +176,23 @@ static nrf_drv_twi_t m_twi_master = NRF_DRV_TWI_INSTANCE(TWI_INSTANCE);
 APP_TIMER_DEF(m_timer);
 
 // @brief object timer to count how long button has been pressed
-APP_TIMER_DEF(m_button_timer); 
+//APP_TIMER_DEF(m_button_timer); 
+
+// @brief object timer for advertising that counting is done
+APP_TIMER_DEF(m_timer_advertising);
+
+// @brief counter to count how many counting done advertisement has been sent.
+static uint8_t m_counter_counting_done = 0;
+
+// @brief counter to count how many counting advertisement has been sent
+static uint8_t m_counter_counting = 0;
 
 /* @brief counts how many m_button_timer has ticked. This is used to determine whether the board should be change to
           IDLE or not*/
-static uint32_t button_ticks_counter = 0;
+//static uint32_t button_ticks_counter = 0;
 
 // @brief this determine whether the m_button_timer should continue ticking or not. Since we are using 
-static bool continue_m_button_timer = false;
+//static bool continue_m_button_timer = false;
 
 
 // @brief object to store active spk list
@@ -257,7 +270,7 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
             break;
 
         case BLE_GAP_EVT_DISCONNECTED:
-            // LED indication will be changed when advertising starts.
+            // BUZZER indication will be changed when advertising starts.
             break;
 
         case BLE_GAP_EVT_PHY_UPDATE_REQUEST:
@@ -291,7 +304,9 @@ void utils_setup(void)
     //APP_SCHED_INIT(SCHED_MAX_EVENT_DATA_SIZE, SCHED_QUEUE_SIZE);
 
     button_init();
-    nrf_gpio_cfg_output(led);
+
+    nrf_gpio_cfg_output(BUZZER);
+    //toggle_two_times_buzzer();
 
     err = app_timer_init();
     APP_ERROR_CHECK(err);
@@ -307,7 +322,10 @@ void utils_setup(void)
        automatically stopped by the board, hence the event of from BUTTON_DONE from timer m_timer can be fel by the board 
        */
 
-    err = app_timer_create(&m_button_timer, APP_TIMER_MODE_SINGLE_SHOT, timer_button_handler);
+    //err = app_timer_create(&m_button_timer, APP_TIMER_MODE_SINGLE_SHOT, timer_button_handler);
+    //APP_ERROR_CHECK(err);
+
+    err = app_timer_create(&m_timer_advertising, APP_TIMER_MODE_SINGLE_SHOT, timer_advertising_handler);
     APP_ERROR_CHECK(err);
 
     NRF_LOG_INFO("Request");
@@ -339,7 +357,7 @@ void utils_setup(void)
     // Register a handler for BLE events.
     NRF_SDH_BLE_OBSERVER(m_ble_observer, APP_BLE_OBSERVER_PRIO, ble_evt_handler, NULL);
 
-    uint8_t nfc_id[] = {0x44, 0x00, 0x11, 0x89};
+    //uint8_t nfc_id[] = {0x44, 0x00, 0x11, 0x89};
     //NRF_LOG_INFO("Init advertising");
     //err = adv_init();
     //APP_ERROR_CHECK(err);
@@ -348,10 +366,10 @@ void utils_setup(void)
     //err = adv_data_config(1,2,3, nfc_id, 4);
     //APP_ERROR_CHECK(err);
 
-    NRF_LOG_INFO("Start advertising");
+    //NRF_LOG_INFO("Start advertising");
     //err = adv_start_or_update(1,2,3, nfc_id, 4);
-    APP_ERROR_CHECK(err);
-    NRF_LOG_INFO("Advertising started");
+    //APP_ERROR_CHECK(err);
+    //NRF_LOG_INFO("Advertising started");
 
     //err = nrf_fstorage_init(&m_fstorage,&nrf_fstorage_nvmc,NULL);
     //APP_ERROR_CHECK(err);
@@ -704,99 +722,103 @@ static void button_event_handler(uint8_t pin_no, uint8_t action){
     
     if (action != APP_BUTTON_PUSH)
     {
-        NRF_LOG_INFO("The button is released");
-        NRF_LOG_FLUSH();
-        //save_current_counter();
-        //printf("The button is not being pushed");
-        if  (pin_no == BUTTON_DONE)
-        {
-            NRF_LOG_INFO("Button ticks counter %d", button_ticks_counter);
-            if (button_ticks_counter < NUM_OF_TICKS_CHANGE_NFC && m_state == CHOOSE_SPK)
-            {
-                NRF_LOG_INFO("SPK %d Selected", m_choose_spk);
-                m_active_nfc.active = true;
-                m_active_nfc.spk = m_choose_spk;
-                m_active_nfc.counter=0; ////////////////// change this
-                //m_active_nfc.nfc_id_len=0;
-                //for(int i=0;i<MAX_NFC_A_ID_LEN;i++){
-                //  m_active_nfc.nfc_id[i] = 0;
-                //}
-                eeprom_data data;
-
-                //data.length = sizeof(counter_t);
-                //memcpy(&(data.p_data[OFFSET_COUNTER_IN_SPK]), 
-                err = eeprom_read_data(&data, addr_eeprom_spk_with_counter(m_choose_spk), sizeof(counter_t));
-                APP_ERROR_CHECK(err);
-
-                NRF_LOG_INFO("Counter : ");
-                NRF_LOG_HEXDUMP_INFO(data.p_data, sizeof(counter_t));
-
-                if (data.p_data[0] == 0xFF && data.p_data[1] == 0xFF && data.p_data[2] == 0xFF && data.p_data[3] == 0xFF)
-                {
-                    
-                    NRF_LOG_INFO("Looks like we are using new EEPROM, hence we will reset the region of memory it to 0");
-                    memset(data.p_data, 0, sizeof(counter_t));
-                    data.length = sizeof(counter_t);
-                    err = eeprom_write_data(&data, addr_eeprom_spk_with_counter(m_choose_spk));
-                
-                }
-                else
-                {
-                    m_active_nfc.counter = CONVERT_8BIT_ARRAY_TO_32BIT(data.p_data);
-                }
-                nrf_gpio_pin_clear(led);
-                update_display_state(START);
-                //save_eeprom();
-                err = app_timer_start(m_timer,
-                                      APP_TIMER_TICKS(DELAY_CHANGE_STATE_DISPLAY),
-                                      &m_state);
-                APP_ERROR_CHECK(err);
-                NRF_LOG_FLUSH();
-            }
-            else if (button_ticks_counter < NUM_OF_TICKS_CHANGE_NFC && m_state == COUNTING)
-            {
-                //m_active_nfc.spk = 0;
-                //m_active_nfc.counter = 0;
-                //m_choose_spk = 1;
-                m_active_nfc.active = false;
-                m_active_nfc.nfc_id_len = 0;
-                memset(m_active_nfc.nfc_id, 0, MAX_NFC_A_ID_LEN);
-                err = nfc_spk_save();
-                if (err != NRF_SUCCESS)
-                {
-                    NRF_LOG_ERROR("Failed to save counting continue in function %s", __func__);
-                    APP_ERROR_CHECK(err);
-                }
-                APP_ERROR_CHECK(adv_stop());
-                update_display_state(CONTINUE);
-            }
-            else if (button_ticks_counter >= NUM_OF_TICKS_CHANGE_NFC && m_state == COUNTING)
-            {
-                //m_choose_spk = 1;
-                //m_state = IDLE;
-                m_active_nfc.active = false;
-                m_active_nfc.nfc_id_len = 0;
-                memset(m_active_nfc.nfc_id, 0, MAX_NFC_A_ID_LEN);
-                m_active_nfc.spk++;
-                m_active_nfc.counter = 0;
-                ret_code_t err;
-                err = nfc_spk_save();
-                if (err != NRF_SUCCESS)
-                {
-                    NRF_LOG_ERROR("Failed to save counting done in function %s", __func__);
-                    APP_ERROR_CHECK(err);
-                }
-                APP_ERROR_CHECK(adv_stop());
-                update_display_state(IDLE);
-
-            }
-            //nrf_delay_ms(10);
-            //app_timer_stop(m_button_timer);
-            button_ticks_counter = 0;
-            continue_m_button_timer = false;
-        }
         return;
     }
+    //if (action != APP_BUTTON_PUSH)
+    //{
+    //    NRF_LOG_INFO("The button is released");
+    //    NRF_LOG_FLUSH();
+    //    //save_current_counter();
+    //    //printf("The button is not being pushed");
+    //    if  (pin_no == BUTTON_DONE)
+    //    {
+    //        NRF_LOG_INFO("Button ticks counter %d", button_ticks_counter);
+    //        if (button_ticks_counter < NUM_OF_TICKS_CHANGE_NFC && m_state == CHOOSE_SPK)
+    //        {
+    //            NRF_LOG_INFO("SPK %d Selected", m_choose_spk);
+    //            m_active_nfc.active = true;
+    //            m_active_nfc.spk = m_choose_spk;
+    //            m_active_nfc.counter=0; ////////////////// change this
+    //            //m_active_nfc.nfc_id_len=0;
+    //            //for(int i=0;i<MAX_NFC_A_ID_LEN;i++){
+    //            //  m_active_nfc.nfc_id[i] = 0;
+    //            //}
+    //            eeprom_data data;
+
+    //            //data.length = sizeof(counter_t);
+    //            //memcpy(&(data.p_data[OFFSET_COUNTER_IN_SPK]), 
+    //            err = eeprom_read_data(&data, addr_eeprom_spk_with_counter(m_choose_spk), sizeof(counter_t));
+    //            APP_ERROR_CHECK(err);
+
+    //            NRF_LOG_INFO("Counter : ");
+    //            NRF_LOG_HEXDUMP_INFO(data.p_data, sizeof(counter_t));
+
+    //            if (data.p_data[0] == 0xFF && data.p_data[1] == 0xFF && data.p_data[2] == 0xFF && data.p_data[3] == 0xFF)
+    //            {
+                    
+    //                NRF_LOG_INFO("Looks like we are using new EEPROM, hence we will reset the region of memory it to 0");
+    //                memset(data.p_data, 0, sizeof(counter_t));
+    //                data.length = sizeof(counter_t);
+    //                err = eeprom_write_data(&data, addr_eeprom_spk_with_counter(m_choose_spk));
+                
+    //            }
+    //            else
+    //            {
+    //                m_active_nfc.counter = CONVERT_8BIT_ARRAY_TO_32BIT(data.p_data);
+    //            }
+    //            nrf_gpio_pin_clear(BUZZER);
+    //            update_display_state(START);
+    //            //save_eeprom();
+    //            err = app_timer_start(m_timer,
+    //                                  APP_TIMER_TICKS(DELAY_CHANGE_STATE_DISPLAY),
+    //                                  &m_state);
+    //            APP_ERROR_CHECK(err);
+    //            NRF_LOG_FLUSH();
+    //        }
+    //        else if (button_ticks_counter < NUM_OF_TICKS_CHANGE_NFC && m_state == COUNTING)
+    //        {
+    //            //m_active_nfc.spk = 0;
+    //            //m_active_nfc.counter = 0;
+    //            //m_choose_spk = 1;
+    //            m_active_nfc.active = false;
+    //            m_active_nfc.nfc_id_len = 0;
+    //            memset(m_active_nfc.nfc_id, 0, MAX_NFC_A_ID_LEN);
+    //            err = nfc_spk_save();
+    //            if (err != NRF_SUCCESS)
+    //            {
+    //                NRF_LOG_ERROR("Failed to save counting continue in function %s", __func__);
+    //                APP_ERROR_CHECK(err);
+    //            }
+    //            APP_ERROR_CHECK(adv_stop());
+    //            update_display_state(CONTINUE);
+    //        }
+    //        else if (button_ticks_counter >= NUM_OF_TICKS_CHANGE_NFC && m_state == COUNTING)
+    //        {
+    //            //m_choose_spk = 1;
+    //            //m_state = IDLE;
+    //            m_active_nfc.active = false;
+    //            m_active_nfc.nfc_id_len = 0;
+    //            memset(m_active_nfc.nfc_id, 0, MAX_NFC_A_ID_LEN);
+    //            m_active_nfc.spk++;
+    //            m_active_nfc.counter = 0;
+    //            ret_code_t err;
+    //            err = nfc_spk_save();
+    //            if (err != NRF_SUCCESS)
+    //            {
+    //                NRF_LOG_ERROR("Failed to save counting done in function %s", __func__);
+    //                APP_ERROR_CHECK(err);
+    //            }
+    //            APP_ERROR_CHECK(adv_stop());
+    //            update_display_state(IDLE);
+
+    //        }
+    //        //nrf_delay_ms(10);
+    //        //app_timer_stop(m_button_timer);
+    //        button_ticks_counter = 0;
+    //        continue_m_button_timer = false;
+    //    }
+    //    return;
+    //}
 
 
 
@@ -861,8 +883,12 @@ static void button_event_handler(uint8_t pin_no, uint8_t action){
                     APP_ERROR_CHECK(err);
                 }
 
-                err = adv_start_or_update(m_active_nfc.spk, m_active_nfc.counter, m_active_nfc.nfc_id, m_active_nfc.nfc_id_len);
+                err = adv_start_or_update(m_active_nfc.spk, m_active_nfc.counter, m_active_nfc.nfc_id, m_active_nfc.nfc_id_len, ADV_COUNTING);
                 APP_ERROR_CHECK(err);
+
+                err = app_timer_start(m_timer_advertising, APP_TIMER_TICKS(ADVERTISING_DURATION), NULL);
+                APP_ERROR_CHECK(err);
+
                 break;
 
             case BUTTON_COUNTER_DOWN:
@@ -890,13 +916,23 @@ static void button_event_handler(uint8_t pin_no, uint8_t action){
                         APP_ERROR_CHECK(err);
                     }
                     //save_eeprom();
-                    err = adv_start_or_update(m_active_nfc.spk, m_active_nfc.counter, m_active_nfc.nfc_id, m_active_nfc.nfc_id_len);
+                    err = adv_start_or_update(m_active_nfc.spk, m_active_nfc.counter, m_active_nfc.nfc_id, m_active_nfc.nfc_id_len, ADV_COUNTING);
+                    APP_ERROR_CHECK(err);
+
+                    err = app_timer_start(m_timer_advertising, APP_TIMER_TICKS(ADVERTISING_DURATION), NULL);
                     APP_ERROR_CHECK(err);
                 }
                 break;
 
             case BUTTON_DONE:
-                continue_m_button_timer = true;
+                err = adv_start_or_update(m_active_nfc.spk, m_active_nfc.counter, m_active_nfc.nfc_id, m_active_nfc.nfc_id_len, ADV_COUNTING_DONE);
+                APP_ERROR_CHECK(err);
+
+                m_counter_counting_done = 1;
+                app_timer_start(m_timer_advertising, APP_TIMER_TICKS(ADVERTISING_DURATION), NULL);
+                update_display_state(COUNTING_DONE);
+                toggle_two_times_buzzer();
+                //continue_m_button_timer = true;
                 //memset(data.p_data, 0, sizeof(counter_t));
                 //ASSIGN_32BIT_TO_8BIT_ARRAY(m_active_nfc.counter, data.p_data);
                 //err = eeprom_write_data(&data, addr_eeprom_spk_with_counter(m_active_nfc.spk));
@@ -905,7 +941,7 @@ static void button_event_handler(uint8_t pin_no, uint8_t action){
                 //    NRF_LOG_ERROR("Failed to write last data counter, in function %s",__func__);
                 //    APP_ERROR_CHECK(err);
                 //}
-                app_timer_start(m_button_timer, APP_TIMER_TICKS(TIMER_TICKS_PER_SHOT), NULL);
+                //app_timer_start(m_button_timer, APP_TIMER_TICKS(TIMER_TICKS_PER_SHOT), NULL);
                 //printf("Counting done!\n");
                 //m_active_nfc.active=false;
                 //m_active_nfc.active=0;
@@ -971,7 +1007,7 @@ static void button_init(){
 }
 
 static void after_found(){
-    if(m_active_nfc.active)
+    if (m_active_nfc.active)
     {
         printf("There is active NFC : ");
         NRF_LOG_INFO("There is activated NFC before : ");
@@ -981,6 +1017,30 @@ static void after_found(){
         //    printf("0x%X ",m_active_nfc.nfc_id[i]);
         //}
         //printf("\n\r");
+        if (m_active_nfc.nfc_id_len == m_nfc_tag.nfc_id_len)
+        {
+            printf("Same length %d %d\n", m_active_nfc.nfc_id_len, m_nfc_tag.nfc_id_len);
+            if (!memcmp(m_active_nfc.nfc_id, m_nfc_tag.nfc_id, m_active_nfc.nfc_id_len))
+            {
+                
+                printf("Same NFC ID detected\n");
+                NRF_LOG_ERROR("Same NFC ID detected");
+                return;
+            }
+
+            for (int i = 0; i<4; i++)
+                {
+                    printf("0x%X  0x%X\n", m_active_nfc.nfc_id[i],  m_nfc_tag.nfc_id[i]);
+                }
+            printf("\n");
+        }
+        
+        NRF_LOG_INFO("Continue counting...!");
+        memcpy(m_active_nfc.nfc_id, m_nfc_tag.nfc_id, m_nfc_tag.nfc_id_len);
+        update_display_state(CONTINUE);
+        app_timer_start(m_timer, APP_TIMER_TICKS(DELAY_CHANGE_STATE_DISPLAY), &m_state);
+        toggle_two_times_buzzer();
+
     }
 
     else{
@@ -1006,7 +1066,7 @@ static void after_found(){
         //}
         //printf("\n\r");
 
-        nrf_gpio_pin_set(led);
+        toggle_two_times_buzzer();
         //update_display_state(START);
 
         //memset(data.p_data, 0, MAX_BYTE_PER_TRX);
@@ -1022,7 +1082,10 @@ static void after_found(){
         }
         update_display_state(COUNTING);
 
-        err = adv_start_or_update(m_active_nfc.spk, m_active_nfc.counter, m_active_nfc.nfc_id, m_active_nfc.nfc_id_len);
+        err = adv_start_or_update(m_active_nfc.spk, m_active_nfc.counter, m_active_nfc.nfc_id, m_active_nfc.nfc_id_len, ADV_COUNTING);
+        APP_ERROR_CHECK(err);
+
+        err = app_timer_start(m_timer_advertising, APP_TIMER_TICKS(ADVERTISING_DURATION), NULL);
         APP_ERROR_CHECK(err);
         //m_choose_spk = 1;
         //update_display_state(CHOOSE_SPK);
@@ -1038,6 +1101,7 @@ static void after_found(){
 
 static void timer_handler(void * p_context){
     printf("Timer handler called\n");
+    NRF_LOG_INFO("Timer Handler called");
     state_type_t state = *(state_type_t *)p_context;
 
     if (state == START)
@@ -1048,21 +1112,81 @@ static void timer_handler(void * p_context){
     {
         update_display_state(IDLE);
     }
+
+    else if (state == CONTINUE)
+    {
+        update_display_state(COUNTING);
+    }
 }
 
-static void timer_button_handler(void *p_context)
-{ 
-    app_timer_stop(m_button_timer);
-    NRF_LOG_INFO("Timer button handler called, current ticks %d", button_ticks_counter);
-    button_ticks_counter++;
-    /* sometimes when the done button (or maybe other buttons as well) is pressed, the board indeed feel the button is pressed
-        but sometimes the board doesn't feel the release of the button. This maybe caused by prioritization between
-        m_timer and m_button_timer, sometimes m_timer has higher priority than m_button_timer, sometimes otherwise.
-    */
-    if (continue_m_button_timer)
+//static void timer_button_handler(void *p_context)
+//{ 
+//    app_timer_stop(m_button_timer);
+//    NRF_LOG_INFO("Timer button handler called, current ticks %d", button_ticks_counter);
+//    button_ticks_counter++;
+//    /* sometimes when the done button (or maybe other buttons as well) is pressed, the board indeed feel the button is pressed
+//        but sometimes the board doesn't feel the release of the button. This maybe caused by prioritization between
+//        m_timer and m_button_timer, sometimes m_timer has higher priority than m_button_timer, sometimes otherwise.
+//    */
+//    if (continue_m_button_timer)
+//    {
+//        app_timer_start(m_button_timer, APP_TIMER_TICKS(TIMER_TICKS_PER_SHOT), NULL);
+//    }
+//}
+
+static void timer_advertising_handler(void * p_context)
+{
+    ret_code_t err;
+
+    NRF_LOG_INFO("Timer advertising handler called");
+    
+    err = app_timer_stop(m_timer_advertising);
+    if (err != NRF_SUCCESS)
     {
-        app_timer_start(m_button_timer, APP_TIMER_TICKS(TIMER_TICKS_PER_SHOT), NULL);
+        NRF_LOG_INFO("Failed to stop timer in function %s",__func__);
+        APP_ERROR_CHECK(err);
     }
+    
+    err = adv_stop();
+    if (err != NRF_SUCCESS)
+    {
+        NRF_LOG_INFO("Failed to stop advertisement when counting done");
+        APP_ERROR_CHECK(err);
+    }
+
+    if (m_state == COUNTING_DONE)
+    {
+        m_counter_counting_done++;
+        if (m_counter_counting_done >= 3)
+        {
+            m_counter_counting_done = 0;
+
+            err = nfc_spk_reset_and_save();
+            APP_ERROR_CHECK(err);
+
+            update_display_state(IDLE);
+            return;
+        }
+        // if m_counter_counting_done haven't reach 3, keep advertising counting_done;
+        err = adv_start_or_update(m_active_nfc.spk, m_active_nfc.counter, m_active_nfc.nfc_id, m_active_nfc.nfc_id_len, ADV_COUNTING_DONE);
+        if (err != NRF_SUCCESS)
+        {
+            NRF_LOG_INFO("Failed to restart counting done advertisement");
+            APP_ERROR_CHECK(err);
+        }
+        err = app_timer_start(m_timer_advertising, APP_TIMER_TICKS(ADVERTISING_DURATION), NULL);
+        if (err != NRF_SUCCESS)
+        {
+            NRF_LOG_INFO("Failed to start advertising in function %s",__func__);
+            APP_ERROR_CHECK(err);
+        }
+    }
+    else if (m_state == COUNTING)
+    {
+      // do nothing since the advertising has been stopped above
+    }
+
+    
 }
 
 static void display_idle(){
@@ -1093,7 +1217,7 @@ static void update_display_counter(){
     ssd1306_draw_char(start + 12, 6, 'u', WHITE, BLACK, 1);
     ssd1306_draw_char(start + 18, 6, 'n', WHITE, BLACK, 1);
     ssd1306_draw_char(start + 24, 6, 't', WHITE, BLACK, 1);
-    auto counter = m_active_nfc.counter;
+    counter_t counter = m_active_nfc.counter;
     // maximum 4 digit counter, since the last element to store '\0' from sprintf
     char counter_string[5];
     uint8_t digits_counter = snprintf(counter_string,5,"%d",counter);
@@ -1389,6 +1513,13 @@ static void save_current_counter()
     APP_ERROR_CHECK(err);    
 }
 
+static void toggle_two_times_buzzer()
+{
+    nrf_gpio_pin_set(BUZZER);
+    nrf_delay_ms(100);
+    nrf_gpio_pin_clear(BUZZER);
+}
+
 static void startup_nfc_spk()
 {
     ret_code_t err;
@@ -1400,7 +1531,12 @@ static void startup_nfc_spk()
     if (m_active_nfc.active)
     {
         update_display_state(COUNTING);
-        adv_start_or_update(m_active_nfc.spk, m_active_nfc.counter, m_active_nfc.nfc_id, m_active_nfc.nfc_id_len);
+
+        err = adv_start_or_update(m_active_nfc.spk, m_active_nfc.counter, m_active_nfc.nfc_id, m_active_nfc.nfc_id_len, ADV_COUNTING);
+        APP_ERROR_CHECK(err);
+
+        err = app_timer_start(m_timer_advertising, APP_TIMER_TICKS(ADVERTISING_DURATION), NULL);
+        APP_ERROR_CHECK(err);
     }
     else
     {
@@ -1422,6 +1558,7 @@ int main(void)
     
     //printf("Initialization...!\n");
     NRF_LOG_INFO("Initialization...!");
+    printf("Initialization...!");
     NRF_LOG_FLUSH();
 
     err_code = i2c_init();
@@ -1448,8 +1585,10 @@ int main(void)
     //printf("EEPROM initialization success\n");
 
     NRF_LOG_INFO("Initializing EEPROM");
+    printf("Initializing EEPROM");
     err_code = nfc_spk_eeprom_init(&m_twi_master, &m_active_nfc);
     APP_ERROR_CHECK(err_code);
+    printf("EEPROM initialized");
     NRF_LOG_INFO("EEPROM initialized");
     NRF_LOG_FLUSH();
 

@@ -241,6 +241,26 @@ ret_code_t nfc_spk_save()
     return err;
 }
 
+ret_code_t nfc_spk_reset_and_save()
+{
+    ret_code_t err;
+    
+    mp_active_nfc->active = false;
+    mp_active_nfc->counter = 0;
+    mp_active_nfc->nfc_id_len = 0;
+    increase_spk();
+    memset(mp_active_nfc->nfc_id, 0, MAX_NFC_A_ID_LEN);
+    err = nfc_spk_save();
+    VERIFY_SUCCESS(err);
+
+    return NRF_SUCCESS;
+}
+
+static void increase_spk()
+{
+    mp_active_nfc->spk++;
+}
+
 ret_code_t nfc_spk_retrieve_complete_set_by_nfc_index(uint8_t nfc_index)
 {
     ret_code_t err;
