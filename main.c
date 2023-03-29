@@ -972,20 +972,20 @@ static void button_init(){
   ret_code_t err;
   static app_button_cfg_t buttons[] = {
                                       { .pin_no = BUTTON_COUNTER_UP,
-                                        .active_state = APP_BUTTON_ACTIVE_LOW,
-                                        .pull_cfg = NRF_GPIO_PIN_PULLUP,
+                                        .active_state = APP_BUTTON_ACTIVE_HIGH,
+                                        .pull_cfg = NRF_GPIO_PIN_NOPULL,
                                         .button_handler = button_event_handler
                                         },
                                       {
                                         .pin_no = BUTTON_COUNTER_DOWN,
-                                        .active_state = APP_BUTTON_ACTIVE_LOW,
-                                        .pull_cfg = NRF_GPIO_PIN_PULLUP,
+                                        .active_state = APP_BUTTON_ACTIVE_HIGH,
+                                        .pull_cfg = NRF_GPIO_PIN_NOPULL,
                                         .button_handler = button_event_handler
                                       },
                                       {
                                         .pin_no = BUTTON_DONE,
-                                        .active_state = APP_BUTTON_ACTIVE_LOW,
-                                        .pull_cfg = NRF_GPIO_PIN_PULLUP,
+                                        .active_state = APP_BUTTON_ACTIVE_HIGH,
+                                        .pull_cfg = NRF_GPIO_PIN_NOPULL,
                                         .button_handler = button_event_handler
                                       }
   };

@@ -47,13 +47,13 @@
  </Watch4>
  <Files>
   <SessionOpenFile windowGroup="DockEditLeft" x="19" y="3" useTextEdit="1" openedFrom="C:/Users/haris/Downloads/DeviceDownload/nRF5_SDK_17.1.0_ddde560/nRF5_SDK_17.1.0_ddde560/examples/My Project/NFC SPK/nfc_spk_eeprom/nfc_spk_eeprom.c" path="../../../main.h" left="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="20" y="34" useTextEdit="1" folds0="341" path="../../../main.c" left="0" top="13" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="20" y="34" useTextEdit="1" path="../../../main.c" left="0" selected="1" top="117" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="22" y="24" useTextEdit="1" openedFrom="C:/Users/haris/Downloads/DeviceDownload/nRF5_SDK_17.1.0_ddde560/nRF5_SDK_17.1.0_ddde560/examples/My Project/NFC SPK/nfc_spk_eeprom/nfc_spk_eeprom.c" path="../../../nfc_spk_eeprom/nfc_spk_eeprom.h" left="0" top="0" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="47" y="49" useTextEdit="1" path="../../../nfc_spk_eeprom/nfc_spk_eeprom.c" left="0" top="42" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="8" y="49" useTextEdit="1" openedFrom="C:/Users/haris/Downloads/DeviceDownload/nRF5_SDK_17.1.0_ddde560/nRF5_SDK_17.1.0_ddde560/examples/My Project/NFC SPK/nfc_spk_eeprom/nfc_spk_eeprom.c" path="../../../../../../components/libraries/eeprom/eeprom.h" left="0" top="34" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="24" y="1" useTextEdit="1" openedFrom="C:/Users/haris/Downloads/DeviceDownload/nRF5_SDK_17.1.0_ddde560/nRF5_SDK_17.1.0_ddde560/examples/My Project/NFC SPK/nfc_spk_eeprom2/nfc_spk_eeprom2.c" path="../../../nfc_spk_eeprom2/nfc_spk_eeprom2.h" left="0" top="1" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="18" y="0" useTextEdit="1" path="../../../nfc_spk_eeprom2/nfc_spk_eeprom2.c" left="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="33" y="341" useTextEdit="1" openedFrom="C:/Users/haris/Downloads/DeviceDownload/nRF5_SDK_17.1.0_ddde560/nRF5_SDK_17.1.0_ddde560/examples/My Project/NFC SPK 2/main.c" path="../../../../../../components/ble/ble_advertising/ble_advertising.h" left="0" selected="1" top="317" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="33" y="341" useTextEdit="1" openedFrom="C:/Users/haris/Downloads/DeviceDownload/nRF5_SDK_17.1.0_ddde560/nRF5_SDK_17.1.0_ddde560/examples/My Project/NFC SPK 2/main.c" path="../../../../../../components/ble/ble_advertising/ble_advertising.h" left="0" top="317" codecName="Default"/>
  </Files>
  <EMStudioWindow activeProject="nfc_spk_pca10100" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="C:/Users/haris/Downloads/DeviceDownload/nRF5_SDK_17.1.0_ddde560/nRF5_SDK_17.1.0_ddde560/examples/My Project/NFC SPK/nfc_spk_eeprom2" debugSearchPath="" autoConnectCapabilities="3199"/>
 </session>
